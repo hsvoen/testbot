@@ -1,0 +1,6 @@
+#Seekrit file
+auth.json
+
+#stuff from dependencies
+package-lock.json
+node_modules
