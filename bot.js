@@ -13,6 +13,14 @@ var bot = new Discord.Client({
    token: auth.token,
    autorun: true
 });
+
+var responseObject = {
+  "sad": "My mind is broken!",
+  "angry": "Stabby times",
+  "scared": "Leaving now",
+  "ping": "pong"
+};
+
 bot.on('ready', function (evt) {
     logger.info('Connected');
     logger.info('Logged in as: ');
@@ -26,15 +34,31 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         var cmd = args[0];
        
         args = args.splice(1);
+
+	if(responseObject[cmd]){
+		bot.sendMessage({
+			to: channelID,
+			message: responseObject[cmd]
+		});
+	}
+
         switch(cmd) {
             // !ping
-            case 'ping':
+            case 'help':
                 bot.sendMessage({
                     to: channelID,
-                    message: 'Pong!'
+                    message: 'The list of commands are:'+responseObject
                 });
             break;
             // Just add any case commands if you want to..
+		//adress for new embed/play command: https://youtu.be/dQw4w9WgXcQ
          }
      }
 });
+// Trying different listener here
+/*
+bot.on("message", (message) => {
+  if(responseObject[cmd]) {
+    message.channel.send(responseObject[cmd]);
+  }
+});*/
