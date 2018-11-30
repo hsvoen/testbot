@@ -30,9 +30,21 @@ bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
     if (message.substring(0, 1) == '!') {
+/*
+	//Did the bot send the message?
+	if(message.author == bot.user){
+	return
+}
+       //Look for the bot being tagged
+	if(message.content.includes(bot.user.toString())){
+		bot.sendMessage({
+			to: channelID,
+			message: "Heeding the command of "+message.author.toString()
+		}); //end of message
+	}
+*/
         var args = message.substring(1).split(' ');
         var cmd = args[0];
-       
         args = args.splice(1);
 
 	if(responseObject[cmd]){
@@ -43,11 +55,11 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 	}
 
         switch(cmd) {
-            // !ping
+            // dump list of commands 
             case 'help':
                 bot.sendMessage({
                     to: channelID,
-                    message: 'The list of commands are:'+responseObject
+                    message: 'The list of commands are:'+JSON.stringify(responseObject)
                 });
             break;
             // Just add any case commands if you want to..
