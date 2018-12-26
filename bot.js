@@ -15,10 +15,10 @@ var bot = new Discord.Client({
 });
 
 var responseObject = {
-  "sad": "My mind is broken!",
-  "angry": "Stabby times",
-  "scared": "Leaving now",
-  "ping": "pong"
+  "!sad": "My mind is broken!",
+  "!angry": "Stabby times",
+  "!scared": "Leaving now",
+  "!ping": "pong"
 };
 
 bot.on('ready', function (evt) {
@@ -43,17 +43,20 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 		}); //end of message
 	}
 */
-        var args = message.substring(1).split(' ');
-        var cmd = args[0];
-        args = args.splice(1);
+        var args = message.substring(0).split(' ');
+        
+	for(i =0; i < args.length; i++){
 
-	if(responseObject[cmd]){
-		bot.sendMessage({
-			to: channelID,
-			message: responseObject[cmd]
-		});
+		var cmd = args[i];
+        	
+	
+		if(responseObject[cmd]){
+			bot.sendMessage({
+				to: channelID,
+				message: responseObject[cmd]
+			});
+		}
 	}
-
         switch(cmd) {
             // dump list of commands 
             case 'help':
@@ -61,6 +64,12 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     to: channelID,
                     message: 'The list of commands are:'+JSON.stringify(responseObject)
                 });
+	       break;
+	    case 'debug':
+		bot.sendMessage({
+		to:channelID,
+		message:JSON.stringify(args)
+		});
             break;
             // Just add any case commands if you want to..
 		//adress for new embed/play command: https://youtu.be/dQw4w9WgXcQ
