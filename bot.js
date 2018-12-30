@@ -4,10 +4,12 @@ var logger = require('winston');
 // 
 if(process.env["env"] == "prod"){
     var token = process.env[token];
+    console.log("Production environment");
 }
 else{
     var auth = require('./auth.json');
     var token = auth.token;
+    console.log("Development environment");
 }
 
 // Configure logger settings
@@ -17,6 +19,7 @@ logger.add(new logger.transports.Console, {
 });
 logger.level = 'debug';
 // Initialize Discord Bot
+console.log("Starting bot");
 var bot = new Discord.Client({
    token: token,
    autorun: true
