@@ -3,10 +3,7 @@ var Discord = require('discord.io');
 var logger = require('winston');
 // 
 if(process.env["env"] == "prod"){
-    var token = process.env[token];
-    console.log("Production environment");
-    console.log("token is:");
-    console.log(token);
+    var token = process.env["token"];
 }
 else{
     var auth = require('./auth.json');
