@@ -1,4 +1,6 @@
 //Copied from https://www.digitaltrends.com/gaming/how-to-make-a-discord-bot/
+var Thoughts = require("./thoughtGenerator");
+
 var Discord = require('discord.io');
 var logger = require('winston');
 // 
@@ -41,61 +43,46 @@ bot.on('ready', function (evt) {
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
-    console.log("Received message");
     if (message.substring(0, 1) == '!') {
-/*
-	//Did the bot send the message?
-	if(message.author == bot.user){
-	return
-}
-       //Look for the bot being tagged
-	if(message.content.includes(bot.user.toString())){
-		bot.sendMessage({
-			to: channelID,
-			message: "Heeding the command of "+message.author.toString()
-		}); //end of message
-	}
-*/
         var args = message.substring(0).split(' ');
-        
-	for(i =0; i < args.length; i++){
+	    for(i =0; i < args.length; i++){
+            var cmd = args[i];
+            console.log("received command: " + cmd)
 
-		var cmd = args[i];
-        	
-	
-		if(responseObject[cmd]){
-			bot.sendMessage({
-				to: channelID,
-				message: responseObject[cmd]
-			});
-		}
-	}
+            if(responseObject[cmd]){
+                bot.sendMessage({
+                    to: channelID,
+                    message: responseObject[cmd]
+                });
+            }
+        }
+
         switch(cmd) {
             // dump list of commands 
-            case 'help':
+            case '!help':
                 bot.sendMessage({
                     to: channelID,
                     message: 'The list of commands are:'+JSON.stringify(responseObject)
                 });
-	       break;
-	    case 'debug':
-		bot.sendMessage({
-		to:channelID,
-		message:JSON.stringify(args)
-		});
-            break;
+	        break;
+            case '!debug':
+                bot.sendMessage({
+                    to:channelID,
+                    message:JSON.stringify(args)
+		        });
+                break;
+            case '!thought':
+                bot.sendMessage({
+                    to:channelID,
+                    message: Thoughts.ThoughtForTheDay()
+                });
+                break;
             // Just add any case commands if you want to..
 		//adress for new embed/play command: https://youtu.be/dQw4w9WgXcQ
          }
      }
 });
-// Trying different listener here
-/*
-bot.on("message", (message) => {
-  if(responseObject[cmd]) {
-    message.channel.send(responseObject[cmd]);
-  }
-});*/
+
 
 
 console.log("Exiting program");
