@@ -33,13 +33,16 @@ var responseObject = {
 };
 
 bot.on('ready', function (evt) {
+    console.log("Bot is ready");
     logger.info('Connected');
     logger.info('Logged in as: ');
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
+
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
+    console.log("Received message");
     if (message.substring(0, 1) == '!') {
 /*
 	//Did the bot send the message?
@@ -94,3 +97,6 @@ bot.on("message", (message) => {
     message.channel.send(responseObject[cmd]);
   }
 });*/
+
+
+console.log("Exiting program");
