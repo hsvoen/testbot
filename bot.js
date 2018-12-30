@@ -29,20 +29,20 @@ bot.on('ready', function (evt) {
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
-    if (message.substring(0, 1) == '!') {
-/*
+    if (message.substring(0, 12) == '@Testbotulist') {
+	/*
 	//Did the bot send the message?
 	if(message.author == bot.user){
 	return
-}
+	}
        //Look for the bot being tagged
 	if(message.content.includes(bot.user.toString())){
 		bot.sendMessage({
 			to: channelID,
 			message: "Heeding the command of "+message.author.toString()
 		}); //end of message
-	}
-*/
+	}*/
+
         var args = message.substring(0).split(' ');
         
 	for(i =0; i < args.length; i++){
