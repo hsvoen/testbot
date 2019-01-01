@@ -29,4 +29,4 @@ steps:
     WebAppName: 'testbotulist'
     Package: '$(System.DefaultWorkingDirectory)'
     GenerateWebConfig: true
-    WebConfigParameters: '-Handler iisnode -NodeStartFile server.js -appType node'
+    WebConfigParameters: '-Handler iisnode -NodeStartFile bot.js -appType node'
